@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qmG-kK-jyD">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HiraginoMaruGothProN.ttc">
+            <string>HiraMaruProN-W4</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Condition View Controller-->
+        <scene sceneID="8pf-Ky-qxF">
+            <objects>
+                <viewController id="qmG-kK-jyD" customClass="ConditionViewController" customModule="AllotMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8oJ-1h-2ur">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CH6-KL-oPn">
+                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="caption" rowHeight="70" id="ddB-xi-qSR" customClass="ConditionCaptionTableViewCell" customModule="AllotMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ddB-xi-qSR" id="gyM-Fe-hbO">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyD-fh-xFp">
+                                                    <rect key="frame" x="16" y="16" width="304" height="1"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="kVe-hT-qHn"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宿泊日を選択してください" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx8-PM-aw5">
+                                                    <rect key="frame" x="16" y="25" width="288" height="16"/>
+                                                    <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dR-vD-FH2">
+                                                    <rect key="frame" x="16" y="49" width="304" height="1"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="tch-o2-pa9"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5dR-vD-FH2" firstAttribute="leading" secondItem="gyM-Fe-hbO" secondAttribute="leading" constant="16" id="7So-rD-IlB"/>
+                                                <constraint firstItem="OyD-fh-xFp" firstAttribute="top" secondItem="gyM-Fe-hbO" secondAttribute="top" constant="16" id="8ob-pq-3oj"/>
+                                                <constraint firstAttribute="trailing" secondItem="Rx8-PM-aw5" secondAttribute="trailing" constant="16" id="GAN-Vn-Tlb"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="5dR-vD-FH2" secondAttribute="bottom" constant="16" id="IJC-Gy-uHi"/>
+                                                <constraint firstItem="Rx8-PM-aw5" firstAttribute="top" secondItem="OyD-fh-xFp" secondAttribute="bottom" constant="8" id="Tv7-Qo-ebG"/>
+                                                <constraint firstAttribute="trailing" secondItem="OyD-fh-xFp" secondAttribute="trailing" id="fqf-yL-hra"/>
+                                                <constraint firstItem="5dR-vD-FH2" firstAttribute="top" secondItem="Rx8-PM-aw5" secondAttribute="bottom" constant="8" id="iXl-VZ-E23"/>
+                                                <constraint firstItem="Rx8-PM-aw5" firstAttribute="leading" secondItem="gyM-Fe-hbO" secondAttribute="leading" constant="16" id="lGf-v8-1Yo"/>
+                                                <constraint firstAttribute="trailing" secondItem="5dR-vD-FH2" secondAttribute="trailing" id="qjt-NK-52r"/>
+                                                <constraint firstItem="OyD-fh-xFp" firstAttribute="leading" secondItem="gyM-Fe-hbO" secondAttribute="leading" constant="16" id="va4-dL-bQI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="Rx8-PM-aw5" id="PW2-Fa-dFW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonLarge" rowHeight="80" id="tHX-gV-yiq" customClass="ConditionDateTableViewCell" customModule="AllotMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="98" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tHX-gV-yiq" id="6XU-ad-yyV">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mf-CO-GjM" customClass="Button" customModule="AllotMe" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="8" width="288" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="64" id="zEh-dS-bTh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="18"/>
+                                                    <state key="normal" title="今日"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="style" value="blue"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6mf-CO-GjM" firstAttribute="leading" secondItem="6XU-ad-yyV" secondAttribute="leading" constant="16" id="8nL-gF-079"/>
+                                                <constraint firstAttribute="trailing" secondItem="6mf-CO-GjM" secondAttribute="trailing" constant="16" id="Vfa-1g-2lj"/>
+                                                <constraint firstItem="6mf-CO-GjM" firstAttribute="top" secondItem="6XU-ad-yyV" secondAttribute="top" constant="8" id="Ykm-Hx-pma"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6mf-CO-GjM" secondAttribute="bottom" constant="8" id="xur-5i-1pV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dateButton" destination="6mf-CO-GjM" id="hDC-Qd-6Gd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonSmall" rowHeight="60" id="LPu-FJ-kGF" customClass="ConditionDateTableViewCell" customModule="AllotMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="178" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LPu-FJ-kGF" id="zTy-N0-ZIX">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btl-nk-YE4" customClass="Button" customModule="AllotMe" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="8" width="288" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="37n-Fa-m4p"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="18"/>
+                                                    <state key="normal" title="今日"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="style" value="blue"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="btl-nk-YE4" firstAttribute="leading" secondItem="zTy-N0-ZIX" secondAttribute="leading" constant="16" id="Rfv-Ri-blb"/>
+                                                <constraint firstItem="btl-nk-YE4" firstAttribute="top" secondItem="zTy-N0-ZIX" secondAttribute="top" constant="8" id="qj3-th-5Ig"/>
+                                                <constraint firstAttribute="trailing" secondItem="btl-nk-YE4" secondAttribute="trailing" constant="16" id="tHu-Sx-KSA"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="btl-nk-YE4" secondAttribute="bottom" constant="8" id="tQo-Y7-oml"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dateButton" destination="btl-nk-YE4" id="HLZ-aT-vMj"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="switch" rowHeight="100" id="Mry-q9-0zv" customClass="ConditionSwitchTableViewCell" customModule="AllotMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="238" width="320" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mry-q9-0zv" id="sIW-mK-7ag">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宿泊日を選択してください" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3G5-kc-a8k">
+                                                    <rect key="frame" x="32" y="16" width="207" height="14"/>
+                                                    <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qi6-8U-1tz">
+                                                    <rect key="frame" x="255" y="8" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="didChangeValueSwitch" destination="Mry-q9-0zv" eventType="valueChanged" id="8UB-Ge-C7w"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="説明文がここに入ります。説明文がここに入ります。説明文がここに入ります。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1K-yz-dPw">
+                                                    <rect key="frame" x="32" y="58" width="272" height="24"/>
+                                                    <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3G5-kc-a8k" firstAttribute="top" secondItem="sIW-mK-7ag" secondAttribute="top" constant="16" id="5n8-Ic-3XM"/>
+                                                <constraint firstItem="E1K-yz-dPw" firstAttribute="leading" secondItem="3G5-kc-a8k" secondAttribute="leading" id="Ds3-Yk-kCi"/>
+                                                <constraint firstItem="qi6-8U-1tz" firstAttribute="trailing" secondItem="E1K-yz-dPw" secondAttribute="trailing" id="VWu-rq-UWV"/>
+                                                <constraint firstItem="qi6-8U-1tz" firstAttribute="top" secondItem="sIW-mK-7ag" secondAttribute="top" constant="8" id="aea-OX-Wgw"/>
+                                                <constraint firstItem="qi6-8U-1tz" firstAttribute="leading" secondItem="3G5-kc-a8k" secondAttribute="trailing" constant="16" id="htE-1o-PNr"/>
+                                                <constraint firstItem="3G5-kc-a8k" firstAttribute="leading" secondItem="sIW-mK-7ag" secondAttribute="leading" constant="32" id="l7z-Y5-ue4"/>
+                                                <constraint firstItem="E1K-yz-dPw" firstAttribute="top" secondItem="3G5-kc-a8k" secondAttribute="bottom" constant="28" id="p6R-7e-1vK"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="E1K-yz-dPw" secondAttribute="bottom" constant="10" id="w6d-sX-riX"/>
+                                                <constraint firstAttribute="trailing" secondItem="qi6-8U-1tz" secondAttribute="trailing" constant="16" id="ytW-mO-9Lh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="summeryLabel" destination="E1K-yz-dPw" id="Q12-ac-gqr"/>
+                                            <outlet property="titleLabel" destination="3G5-kc-a8k" id="Gfb-CG-Mvq"/>
+                                            <outlet property="valueSwitch" destination="qi6-8U-1tz" id="HZf-2f-iVY"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="qmG-kK-jyD" id="Ytj-Ia-nxC"/>
+                                    <outlet property="delegate" destination="qmG-kK-jyD" id="PkY-DX-4oh"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CH6-KL-oPn" firstAttribute="leading" secondItem="4DF-x6-Tg6" secondAttribute="leading" id="98p-3e-qGr"/>
+                            <constraint firstItem="CH6-KL-oPn" firstAttribute="trailing" secondItem="4DF-x6-Tg6" secondAttribute="trailing" id="9pj-a8-JSp"/>
+                            <constraint firstItem="4DF-x6-Tg6" firstAttribute="bottom" secondItem="CH6-KL-oPn" secondAttribute="bottom" id="PRO-RF-UCf"/>
+                            <constraint firstItem="CH6-KL-oPn" firstAttribute="top" secondItem="4DF-x6-Tg6" secondAttribute="top" id="k8u-Ob-xLm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4DF-x6-Tg6"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="CH6-KL-oPn" id="BQk-Re-c1J"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KO8-UP-PYi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="106.875" y="90"/>
+        </scene>
+    </scenes>
+</document>

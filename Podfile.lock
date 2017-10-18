@@ -1,0 +1,22 @@
+PODS:
+  - Alamofire (4.5.1)
+  - AlamofireImage (3.3.0):
+    - Alamofire (~> 4.5)
+  - SVProgressHUD (2.2.1)
+  - SWXMLHash (4.2.3)
+
+DEPENDENCIES:
+  - Alamofire
+  - AlamofireImage
+  - SVProgressHUD
+  - SWXMLHash
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
+  SWXMLHash: 6ab10e1cb4567d88cd3634be0bf331a7839945dd
+
+PODFILE CHECKSUM: 9da7a59dd3033361cf952613f85eb38e8d7d142f
+
+COCOAPODS: 1.1.1
