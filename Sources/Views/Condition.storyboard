@@ -4,7 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,7 +73,7 @@
                                             <outlet property="titleLabel" destination="Rx8-PM-aw5" id="PW2-Fa-dFW"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonLarge" rowHeight="80" id="tHX-gV-yiq" customClass="ConditionDateTableViewCell" customModule="AllotMe" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="date" rowHeight="80" id="tHX-gV-yiq" customClass="ConditionDateTableViewCell" customModule="AllotMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="98" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tHX-gV-yiq" id="6XU-ad-yyV">
@@ -89,6 +90,9 @@
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="string" keyPath="style" value="blue"/>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="didTapDateButton" destination="tHX-gV-yiq" eventType="touchUpInside" id="knD-Xn-Y3P"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -103,39 +107,8 @@
                                             <outlet property="dateButton" destination="6mf-CO-GjM" id="hDC-Qd-6Gd"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonSmall" rowHeight="60" id="LPu-FJ-kGF" customClass="ConditionDateTableViewCell" customModule="AllotMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="178" width="320" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LPu-FJ-kGF" id="zTy-N0-ZIX">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btl-nk-YE4" customClass="Button" customModule="AllotMe" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="8" width="288" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="37n-Fa-m4p"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="18"/>
-                                                    <state key="normal" title="今日"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="style" value="blue"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="btl-nk-YE4" firstAttribute="leading" secondItem="zTy-N0-ZIX" secondAttribute="leading" constant="16" id="Rfv-Ri-blb"/>
-                                                <constraint firstItem="btl-nk-YE4" firstAttribute="top" secondItem="zTy-N0-ZIX" secondAttribute="top" constant="8" id="qj3-th-5Ig"/>
-                                                <constraint firstAttribute="trailing" secondItem="btl-nk-YE4" secondAttribute="trailing" constant="16" id="tHu-Sx-KSA"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="btl-nk-YE4" secondAttribute="bottom" constant="8" id="tQo-Y7-oml"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="dateButton" destination="btl-nk-YE4" id="HLZ-aT-vMj"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="switch" rowHeight="100" id="Mry-q9-0zv" customClass="ConditionSwitchTableViewCell" customModule="AllotMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="238" width="320" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bool" rowHeight="100" id="Mry-q9-0zv" customClass="ConditionSwitchTableViewCell" customModule="AllotMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="178" width="320" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mry-q9-0zv" id="sIW-mK-7ag">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
@@ -179,6 +152,48 @@
                                             <outlet property="valueSwitch" destination="qi6-8U-1tz" id="HZf-2f-iVY"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="supplier" rowHeight="100" id="jzG-la-cdf" customClass="ConditionSupplierTableViewCell" customModule="AllotMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="278" width="320" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jzG-la-cdf" id="8xf-m0-eLc">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfe-je-IcV">
+                                                    <rect key="frame" x="16" y="16" width="136" height="46.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Tfe-je-IcV" secondAttribute="height" multiplier="161:55" id="Ksf-g2-ALI"/>
+                                                    </constraints>
+                                                    <state key="normal" image="logo-rakuten-2"/>
+                                                    <connections>
+                                                        <action selector="didTapRakutenButton" destination="jzG-la-cdf" eventType="touchUpInside" id="NIs-8h-l6M"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pt6-H3-cRI">
+                                                    <rect key="frame" x="168" y="16" width="136" height="46.5"/>
+                                                    <state key="normal" image="logo-jalan-2"/>
+                                                    <connections>
+                                                        <action selector="didTapJalanButton" destination="jzG-la-cdf" eventType="touchUpInside" id="FeG-WQ-fd9"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pt6-H3-cRI" firstAttribute="top" secondItem="Tfe-je-IcV" secondAttribute="top" id="3KB-Tp-chu"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Tfe-je-IcV" secondAttribute="bottom" constant="16" id="Kg9-hW-yYl"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pt6-H3-cRI" secondAttribute="trailing" constant="16" id="Msb-Ub-FbC"/>
+                                                <constraint firstItem="pt6-H3-cRI" firstAttribute="width" secondItem="Tfe-je-IcV" secondAttribute="width" id="R5e-LY-g9y"/>
+                                                <constraint firstItem="pt6-H3-cRI" firstAttribute="bottom" secondItem="Tfe-je-IcV" secondAttribute="bottom" id="Upm-nr-CCs"/>
+                                                <constraint firstItem="pt6-H3-cRI" firstAttribute="leading" secondItem="Tfe-je-IcV" secondAttribute="trailing" constant="16" id="aRJ-ar-iN9"/>
+                                                <constraint firstItem="Tfe-je-IcV" firstAttribute="top" secondItem="8xf-m0-eLc" secondAttribute="top" constant="16" id="wNd-fA-t7T"/>
+                                                <constraint firstItem="Tfe-je-IcV" firstAttribute="leading" secondItem="8xf-m0-eLc" secondAttribute="leading" constant="16" id="yx4-yR-IEv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="jalanButton" destination="pt6-H3-cRI" id="g9c-KC-NKk"/>
+                                            <outlet property="rakutenButton" destination="Tfe-je-IcV" id="8wy-WW-gyl"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="qmG-kK-jyD" id="Ytj-Ia-nxC"/>
@@ -204,4 +219,8 @@
             <point key="canvasLocation" x="106.875" y="90"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo-jalan-2" width="161" height="55"/>
+        <image name="logo-rakuten-2" width="161" height="55"/>
+    </resources>
 </document>

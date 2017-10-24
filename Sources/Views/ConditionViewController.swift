@@ -11,6 +11,7 @@ class ConditionViewController: ViewController {
         case tomorrow
         case dayAfterTomorrow
         case selectDate
+        case supplier
         case isNoSmoking
         case hasInternat
         case hasPublicBath
@@ -40,6 +41,7 @@ class ConditionViewController: ViewController {
             case .filterMaleOnly:   return "「男性」を除く"
             case .filterFamaleOnly: return "「女性」を除く"
             case .filterBirthday:   return "「誕生日」を除く"
+            default: return ""
             }
         }
         
@@ -71,6 +73,15 @@ class ConditionViewController: ViewController {
                 こちらをオンにすると、プラン名に「誕生日」というキーワードが入っていた場合は一覧から除外します。
                 """
             default: return ""
+            }
+        }
+        
+        var dateValue: (from: Date, to: Date)! {
+            switch self {
+            case .today:            return (from: Date().date(addDay: 0), to: Date().date(addDay: 1))
+            case .tomorrow:         return (from: Date().date(addDay: 1), to: Date().date(addDay: 2))
+            case .dayAfterTomorrow: return (from: Date().date(addDay: 2), to: Date().date(addDay: 3))
+            default: return nil
             }
         }
         
@@ -111,16 +122,24 @@ class ConditionViewController: ViewController {
     
     enum Row {
         case caption(title: String)
-        case buttonLarge(item: ConditionItem)
-        case buttonSmall(item: ConditionItem)
-        case `switch`(item: ConditionItem)
+        case date(item: ConditionItem)
+        case bool(item: ConditionItem)
+        case supplier
         
         var identifier: String {
             switch self {
-            case .caption:     return "caption"
-            case .buttonLarge: return "buttonLarge"
-            case .buttonSmall: return "buttonSmall"
-            case .`switch`:    return "switch"
+            case .caption:  return "caption"
+            case .date:     return "date"
+            case .bool:     return "bool"
+            case .supplier: return "supplier"
+            }
+        }
+        
+        var conditionItem: ConditionItem? {
+            switch self {
+            case let .date(item), let .bool(item):
+                return item
+            default: return nil
             }
         }
         
@@ -128,80 +147,58 @@ class ConditionViewController: ViewController {
             switch self {
             case let .caption(title):
                 return title
-            case let .buttonLarge(item),
-                 let .buttonSmall(item),
-                 let .`switch`(item):
+            case let .date(item), let .bool(item):
                 return item.title
+            default: return ""
             }
         }
         
         var summery: String {
-            switch self {
-            case let .buttonLarge(item),
-                 let .buttonSmall(item),
-                 let .`switch`(item):
-                return item.summery
-            default:
-                return ""
-            }
+            return conditionItem?.summery ?? ""
         }
         
         func boolValue(ofCondition condition: Condition) -> Bool {
-            switch self {
-            case let .buttonLarge(item),
-                 let .buttonSmall(item),
-                 let .`switch`(item):
-                return item.boolValue(ofCondition: condition)
-            default:
-                return false
-            }
+            return conditionItem?.boolValue(ofCondition: condition) ?? false
         }
         
         func setBoolValue(ofCondition condition: inout Condition, value: Bool) {
-            switch self {
-            case let .buttonLarge(item),
-                 let .buttonSmall(item),
-                 let .`switch`(item):
-                item.setBoolValue(ofCondition: &condition, value: value)
-            default: break
-            }
+            conditionItem?.setBoolValue(ofCondition: &condition, value: value)
         }
         
         static var rows: [Row] {
             return [
                 .caption(title: "宿泊日を選択してください"),
-                .buttonLarge(item: .today),
-                .buttonLarge(item: .tomorrow),
-                .buttonSmall(item: .dayAfterTomorrow),
-                .buttonSmall(item: .selectDate),
+                .date(item: .today),
+                .date(item: .tomorrow),
+                .date(item: .dayAfterTomorrow),
+                .date(item: .selectDate),
+                .caption(title: "データの提供元を指定できます"),
+                .supplier,
                 .caption(title: "絞り込む条件を指定できます"),
-                .`switch`(item: .isNoSmoking),
-                .`switch`(item: .hasInternat),
-                .`switch`(item: .hasPublicBath),
-                .`switch`(item: .hasHotSpring),
-                .`switch`(item: .hasBreakfast),
-                .`switch`(item: .hasDinner),
+                .bool(item: .isNoSmoking),
+                .bool(item: .hasInternat),
+                .bool(item: .hasPublicBath),
+                .bool(item: .hasHotSpring),
+                .bool(item: .hasBreakfast),
+                .bool(item: .hasDinner),
                 .caption(title: "プラン名に含まれる文字を除外することができます"),
-                .`switch`(item: .filterHayawari),
-                .`switch`(item: .filterGakueari),
-                .`switch`(item: .filterMaleOnly),
-                .`switch`(item: .filterFamaleOnly),
-                .`switch`(item: .filterBirthday),
+                .bool(item: .filterHayawari),
+                .bool(item: .filterGakueari),
+                .bool(item: .filterMaleOnly),
+                .bool(item: .filterFamaleOnly),
+                .bool(item: .filterBirthday),
             ]
         }
     }
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private var area: Area!
-    private var pref: Pref!
-    
     private var currentCondition = Condition()
     
     class func create(area: Area, pref: Pref) -> UIViewController {
         let vc = UIStoryboard(name: "Condition", bundle: nil).instantiateInitialViewController()! as! ConditionViewController
-        vc.area = area
-        vc.pref = pref
+        vc.currentCondition.area = area
+        vc.currentCondition.pref = pref
         return vc
     }
     
@@ -212,7 +209,7 @@ class ConditionViewController: ViewController {
     }
     
     private func prepareTitle() {
-        title = area.name
+        title = currentCondition.area.name
     }
     
     private func prepareTableView() {
@@ -240,7 +237,17 @@ extension ConditionViewController: UITableViewDelegate, UITableViewDataSource {
 extension ConditionViewController: ConditionTableViewCellDelegate {
     
     func cellDidTapDate(from: Date, to: Date) {
+        currentCondition.checkInDate  = from
+        currentCondition.checkOutDate = to
+        navigation?.push(ListViewController.create(condition: currentCondition))
+    }
+    
+    func cellDidTapSelectDate() {
         
+    }
+    
+    func cellDidChangeSuppliers(_ suppliers: [Supplier]) {
+        currentCondition.suppliers = suppliers
     }
     
     func cellDidChangeValueSwitch(ofRow row: ConditionViewController.Row, to value: Bool) {
@@ -251,6 +258,10 @@ extension ConditionViewController: ConditionTableViewCellDelegate {
 protocol ConditionTableViewCellDelegate: class {
     
     func cellDidTapDate(from: Date, to: Date)
+    
+    func cellDidTapSelectDate()
+    
+    func cellDidChangeSuppliers(_ suppliers: [Supplier])
     
     func cellDidChangeValueSwitch(ofRow row: ConditionViewController.Row, to value: Bool)
 }
@@ -282,6 +293,15 @@ class ConditionDateTableViewCell: ConditionTableViewCell {
             dateButton.setTitle(row.title, for: .normal)
         }
     }
+    
+    @IBAction private func didTapDateButton() {
+        if row.conditionItem! == .selectDate {
+            delegate.cellDidTapSelectDate()
+        } else {
+            let fromTo = row.conditionItem!.dateValue!
+            delegate.cellDidTapDate(from: fromTo.from, to: fromTo.to)
+        }
+    }
 }
 
 class ConditionSwitchTableViewCell: ConditionTableViewCell {
@@ -300,5 +320,51 @@ class ConditionSwitchTableViewCell: ConditionTableViewCell {
     
     @IBAction private func didChangeValueSwitch() {
         delegate.cellDidChangeValueSwitch(ofRow: row, to: valueSwitch.isOn)
+    }
+}
+
+class ConditionSupplierTableViewCell: ConditionTableViewCell {
+    
+    @IBOutlet private weak var rakutenButton: UIButton!
+    @IBOutlet private weak var jalanButton: UIButton!
+    
+    override var condition: Condition! {
+        didSet {
+            rakuten = condition.suppliers.contains(.rakuten)
+            jalan   = condition.suppliers.contains(.jalan)
+        }
+    }
+    
+    @IBAction private func didTapRakutenButton() {
+        if !jalan && rakuten { return }
+        rakuten = !rakuten
+        informToDelegate()
+    }
+    
+    @IBAction private func didTapJalanButton() {
+        if !rakuten && jalan { return }
+        jalan = !jalan
+        informToDelegate()
+    }
+    
+    private func informToDelegate() {
+        var suppliers = [Supplier]()
+        if rakuten { suppliers.append(.rakuten) }
+        if jalan   { suppliers.append(.jalan) }
+        delegate.cellDidChangeSuppliers(suppliers)
+    }
+    
+    private var rakuten: Bool = true {
+        didSet {
+            let image = UIImage(named: "logo-rakuten-2" + (rakuten ? "" : "-off"))!
+            rakutenButton.setImage(image, for: .normal)
+        }
+    }
+    
+    private var jalan: Bool = true {
+        didSet {
+            let image = UIImage(named: "logo-jalan-2" + (jalan ? "" : "-off"))!
+            jalanButton.setImage(image, for: .normal)
+        }
     }
 }

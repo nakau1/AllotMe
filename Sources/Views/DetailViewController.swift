@@ -9,25 +9,17 @@ import MapKit
 class DetailViewController: ViewController {
     
     enum Row {
-        case hotelName
-        case planName
-        case hotelImage
-        case image(url: String)
         case baseInfo
+        case image(url: String)
         case info(title: String, value: String, link: String?)
-        case address
         case summery
         
         var identifier: String {
             switch self {
-            case .hotelName:  return "hotelName"
-            case .planName:   return "planName"
-            case .hotelImage: return "hotelImage"
-            case .image:      return "image"
-            case .baseInfo:   return "baseInfo"
-            case .info:       return "info"
-            case .address:    return "address"
-            case .summery:    return "summery"
+            case .baseInfo: return "baseInfo"
+            case .image:    return "image"
+            case .info:     return "info"
+            case .summery:  return "summery"
             }
         }
     }
@@ -58,13 +50,7 @@ class DetailViewController: ViewController {
             return storedRows
         }
         
-        var ret: [Row] = [
-            .hotelName,
-            .planName,
-            .hotelImage,
-            .baseInfo,
-            .address,
-        ]
+        var ret: [Row] = [.baseInfo]
         
         var infos = [Row]()
         infos.append(.info(title: "URL", value: plan.hotelURL, link: plan.hotelURL))
@@ -72,9 +58,6 @@ class DetailViewController: ViewController {
         
         if let reservationTel = plan.reservationTel {
             infos.append(.info(title: "予約電話番号", value: reservationTel, link: reservationTel))
-        }
-        if let lastCheckIn = plan.lastCheckIn {
-            infos.append(.info(title: "最終チェックイン", value: lastCheckIn, link: nil))
         }
         if let access = plan.access {
             infos.append(.info(title: "アクセス", value: access, link: nil))
@@ -124,79 +107,53 @@ class DetailTableViewCell: UITableViewCell {
     weak var delegate: DetailTableViewCellDelegate!
 }
 
-class DetailHotelNameTableViewCell: DetailTableViewCell {
-    
-    @IBOutlet private weak var supplierImageView: UIImageView!
-    @IBOutlet private weak var nameKanaLabel: UILabel!
-    @IBOutlet private weak var nameLabel: UILabel!
-    
-    override var plan: Plan! {
-        didSet {
-            nameKanaLabel.text = plan.hotelNameKana
-            nameLabel.text = plan.hotelName
-        }
-    }
-}
-
-class DetailPlanNameTableViewCell: DetailTableViewCell {
-    
-    @IBOutlet private weak var nameLabel: UILabel!
-    
-    override var plan: Plan! {
-        didSet {
-            nameLabel.text = plan.planName
-        }
-    }
-}
-
-class DetailHotelImageTableViewCell: DetailTableViewCell {
-    
-    @IBOutlet private weak var hotelImageView: UIImageView!
-    
-    override var plan: Plan! {
-        didSet {
-            if let url = URL(string: plan.imageURLString) {
-                hotelImageView.af_setImage(withURL: url)
-            } else {
-                hotelImageView.image = nil
-            }
-        }
-    }
-}
-
-class DetailImageTableViewCell: DetailTableViewCell {
-    
-    @IBOutlet private weak var pictureImageView: UIImageView!
-    
-    override var plan: Plan! {
-        didSet {
-            if let url = self.url {
-                pictureImageView.af_setImage(withURL: url)
-            } else {
-                pictureImageView.image = nil
-            }
-        }
-    }
-    
-    private var url: URL? {
-        let row: DetailViewController.Row = self.row
-        switch row {
-        case let .image(urlString):
-            return URL(string: urlString)
-        default:
-            return nil
-        }
-    }
-}
-
 class DetailBaseInfoTableViewCell: DetailTableViewCell {
     
+    @IBOutlet private weak var supplierImageView: UIImageView!
+    @IBOutlet private weak var hotelNameKanaLabel: UILabel!
+    @IBOutlet private weak var hotelNameLabel: UILabel!
+    @IBOutlet private weak var planNameLabel: UILabel!
+    @IBOutlet private weak var hotelImageView: UIImageView!
+    @IBOutlet private weak var hotelSummeryLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
+    @IBOutlet private weak var checkInLabel: UILabel!
+    @IBOutlet private weak var checkOutLabel: UILabel!
+    @IBOutlet private weak var lastCheckInLabel: UILabel!
+    @IBOutlet private weak var postalCodeLabel: UILabel!
+    @IBOutlet private weak var addressLabel: UILabel!
+    @IBOutlet private weak var mapView: MKMapView!
     
     override var plan: Plan! {
         didSet {
+            setHotelImage(urlString: plan.imageURLString)
+            supplierImageView.image = plan.supplier.logoImage
             
+            hotelNameKanaLabel.text = plan.hotelNameKana
+            hotelNameLabel.text = plan.hotelName
+            planNameLabel.text = plan.planName
+            hotelSummeryLabel.text = plan.hotelSummery
+            priceLabel.text = plan.price.currencyText
+            checkInLabel.text = plan.checkIn
+            checkOutLabel.text = plan.checkOut
+            lastCheckInLabel.text = (plan.lastCheckIn != nil) ? "〜 \(plan.lastCheckIn!)" : ""
+            postalCodeLabel.text = plan.postalCode
+            addressLabel.text = plan.address
         }
+    }
+    
+    private func setHotelImage(urlString: String) {
+        guard let url = URL(string: urlString) else {
+            hotelImageView.image = nil
+            return
+        }
+        
+        let filter = AspectScaledToFillSizeFilter(size: UIScreen.size(for: 1/2))
+        hotelImageView.af_setImage(
+            withURL: url,
+            placeholderImage: nil,
+            filter: filter,
+            imageTransition: .crossDissolve(0.5)
+        )
     }
 }
 
@@ -226,16 +183,27 @@ class DetailInfoTableViewCell: DetailTableViewCell {
     }
 }
 
-class DetailAddressTableViewCell: DetailTableViewCell {
+class DetailImageTableViewCell: DetailTableViewCell {
     
-    @IBOutlet private weak var postalCodeLabel: UILabel!
-    @IBOutlet private weak var addressLabel: UILabel!
-    @IBOutlet private weak var mapView: MKMapView!
+    @IBOutlet private weak var pictureImageView: UIImageView!
     
     override var plan: Plan! {
         didSet {
-            postalCodeLabel.text = plan.postalCode
-            addressLabel.text = plan.address
+            if let url = self.url {
+                pictureImageView.af_setImage(withURL: url)
+            } else {
+                pictureImageView.image = nil
+            }
+        }
+    }
+    
+    private var url: URL? {
+        let row: DetailViewController.Row = self.row
+        switch row {
+        case let .image(urlString):
+            return URL(string: urlString)
+        default:
+            return nil
         }
     }
 }

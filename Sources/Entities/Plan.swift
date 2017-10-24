@@ -3,6 +3,7 @@
 // (c) NAKAYASU Yuichi all rights reserves.
 // *****************************************************************************
 import Foundation
+import CoreLocation
 
 struct Plan {
     var hotelID = ""
@@ -22,6 +23,7 @@ struct Plan {
     var rate: Double?
     var price = 0
     
+    var stayDate: Date?
     var checkIn = ""
     var checkOut = ""
     var lastCheckIn: String? // 楽天のみ
@@ -37,8 +39,7 @@ struct Plan {
     var hotelSummery = ""
     var summery = ""
     
-    var longitude = 34.688986
-    var latitude = 135.496204
+    var location = CLLocationCoordinate2D(latitude: 34.688986, longitude: 135.496204)
     
     var supplier = Supplier.rakuten
 }

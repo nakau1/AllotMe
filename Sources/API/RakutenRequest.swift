@@ -4,6 +4,7 @@
 // *****************************************************************************
 import Alamofire
 import SWXMLHash
+import CoreLocation
 
 class RakutenRequest: WebAPIRequestable {
     
@@ -54,7 +55,7 @@ class RakutenRequest: WebAPIRequestable {
     
     private func parse(hoteBaselInfo xml: XMLIndexer, to plan: inout Plan) {
         plan.hotelID = xml["hotelNo"].stringValue
-        plan.hotelName = xml["hotelName"].stringValue
+        plan.hotelName = xml["hotelName"].stringValue.half
         plan.hotelNameKana = xml["hotelKanaName"].stringValue
         plan.hotelURL = xml["hotelInformationUrl"].stringValue
         plan.hotelSummery = xml["hotelSpecial"].stringValue
@@ -77,10 +78,10 @@ class RakutenRequest: WebAPIRequestable {
         plan.ratingCount = xml["reviewCount"].intValue
         plan.rate = xml["reviewAverage"].double
         
-        let lat = xml["latitude"].doubleValue
-        let lng = xml["longitude"].doubleValue
-        plan.latitude = lat.latitudeTDtoWGS(longitude: lng)
-        plan.longitude = lng.longitudeTDtoWGS(latitude: lat)
+        plan.location = CLLocationCoordinate2D(
+            latitudeOnTD:  xml["latitude"].doubleValue,
+            longitudeOnTD: xml["longitude"].doubleValue
+        )
     }
     
     private func parse(hotelDetailInfo xml: XMLIndexer, to plan: inout Plan) {
@@ -97,6 +98,7 @@ class RakutenRequest: WebAPIRequestable {
     }
     
     private func parse(dailyCharge xml: XMLIndexer, to plan: inout Plan) {
+        plan.stayDate = Date.date(from: xml["stayDate"].stringValue, format: "yyyy-MM-dd")
         plan.price = xml["total"].intValue
     }
     
@@ -111,11 +113,11 @@ class RakutenRequest: WebAPIRequestable {
             "searchPattern": "1",
             "responseType": "large",
             
-            "latitude": "\(condition.area.latitude.latitudeWGStoTD(longitude: condition.area.longitude))",
-            "longitude": "\(condition.area.longitude.longitudeWGStoTD(latitude: condition.area.latitude))",
+            "latitude": "\(condition.area.location.tokyoDatum.latitude)",
+            "longitude": "\(condition.area.location.tokyoDatum.longitude)",
             "searchRadius": "\(condition.area.radius)",
-            "checkinDate":"2017-12-01",
-            "checkoutDate":"2017-12-02",
+            "checkinDate": condition.checkInDate.hyphenatedString,
+            "checkoutDate": condition.checkOutDate.hyphenatedString,
         ]
         return ret
     }

@@ -3,18 +3,17 @@
 // (c) NAKAYASU Yuichi all rights reserves.
 // *****************************************************************************
 import Foundation
+import CoreLocation
 
 struct Area {
     
     let name: String
-    let latitude: Double
-    let longitude: Double
+    let location: CLLocationCoordinate2D
     let radius: Double
     
-    init(_ name: String, _ latitude: Double, _ longitude: Double, _ radius: Double = 1.0) {
+    init(_ name: String, _ latitude: CLLocationDegrees, _ longitude: CLLocationDegrees, _ radius: Double = 1.0) {
         self.name = name
-        self.latitude = latitude
-        self.longitude = longitude
+        self.location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         self.radius = radius
     }
 

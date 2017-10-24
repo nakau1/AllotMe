@@ -3,6 +3,27 @@
 // (c) NAKAYASU Yuichi all rights reserves.
 // *****************************************************************************
 import Foundation
+import CoreLocation
+
+/*
+ TD:  Tokyo Datum
+ WGS: World Geodetic System
+ */
+
+extension CLLocationCoordinate2D {
+    
+    init(latitudeOnTD latitude: CLLocationDegrees, longitudeOnTD longitude: CLLocationDegrees) {
+        self.latitude  = latitude.latitudeTDtoWGS(longitude: longitude)
+        self.longitude = longitude.longitudeTDtoWGS(latitude: latitude)
+    }
+    
+    var tokyoDatum: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(
+            latitude:  self.latitude.latitudeWGStoTD(longitude: self.longitude),
+            longitude: self.longitude.longitudeWGStoTD(latitude: self.latitude)
+        )
+    }
+}
 
 // http://co-co-wa.com/lat-lng-change-program/
 extension Double {
