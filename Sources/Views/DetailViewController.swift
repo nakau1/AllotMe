@@ -11,14 +11,35 @@ class DetailViewController: ViewController {
     enum Row {
         case baseInfo
         case image(url: String)
-        case info(title: String, value: String, link: String?)
+        case info(title: String, value: String)
+        case link(title: String, value: String, link: Link)
         case summery
+        
+        enum Link {
+            case web(url: String)
+            case tel(number: String)
+            
+            var value: String {
+                switch self {
+                case let .web(url):    return url
+                case let .tel(number): return number
+                }
+            }
+            
+            var iconImage: UIImage {
+                switch self {
+                case .web: return UIImage(named: "icon-safari")!
+                case .tel: return UIImage(named: "icon-tel")!
+                }
+            }
+        }
         
         var identifier: String {
             switch self {
             case .baseInfo: return "baseInfo"
             case .image:    return "image"
             case .info:     return "info"
+            case .link:     return "link"
             case .summery:  return "summery"
             }
         }
@@ -53,17 +74,17 @@ class DetailViewController: ViewController {
         var ret: [Row] = [.baseInfo]
         
         var infos = [Row]()
-        infos.append(.info(title: "URL", value: plan.hotelURL, link: plan.hotelURL))
-        infos.append(.info(title: "ホテル電話番号", value: plan.tel, link: plan.tel))
+        infos.append(.link(title: "ホテルHP", value: "サイトを開く", link: .web(url: plan.hotelURL)))
+        infos.append(.link(title: "ホテル電話番号", value: plan.tel, link: .tel(number: plan.tel)))
         
         if let reservationTel = plan.reservationTel {
-            infos.append(.info(title: "予約電話番号", value: reservationTel, link: reservationTel))
+            infos.append(.link(title: "予約電話番号", value: reservationTel, link: .tel(number: reservationTel)))
         }
         if let access = plan.access {
-            infos.append(.info(title: "アクセス", value: access, link: nil))
+            infos.append(.info(title: "アクセス", value: access))
         }
         if let parking = plan.parking {
-            infos.append(.info(title: "駐車場", value: parking, link: nil))
+            infos.append(.info(title: "駐車場", value: parking))
         }
         ret.append(contentsOf: infos)
         
@@ -161,21 +182,46 @@ class DetailInfoTableViewCell: DetailTableViewCell {
     
     @IBOutlet private weak var captionLabel: UILabel!
     @IBOutlet private weak var valueLabel: UILabel!
+    
+    override var plan: Plan! {
+        didSet {
+            if let info = self.info {
+                captionLabel.text = info.title
+                valueLabel.text   = info.value
+            }            
+        }
+    }
+    
+    private var info: (title: String, value: String)? {
+        let row: DetailViewController.Row = self.row
+        switch row {
+        case let .info(title, value):
+            return (title: title, value: value)
+        default:
+            return nil
+        }
+    }
+}
+
+class DetailLinkTableViewCell: DetailTableViewCell {
+    
+    @IBOutlet private weak var captionLabel: UILabel!
     @IBOutlet private weak var valueButton: UIButton!
     
     override var plan: Plan! {
         didSet {
             if let info = self.info {
                 captionLabel.text = info.title
-                valueLabel.text = info.value
-            }            
+                valueButton.setTitle(info.value, for: .normal)
+                valueButton.setImage(info.link.iconImage, for: .normal)
+            }
         }
     }
     
-    private var info: (title: String, value: String, link: String?)? {
+    private var info: (title: String, value: String, link: DetailViewController.Row.Link)? {
         let row: DetailViewController.Row = self.row
         switch row {
-        case let .info(title, value, link):
+        case let .link(title, value, link):
             return (title: title, value: value, link: link)
         default:
             return nil
@@ -189,11 +235,7 @@ class DetailImageTableViewCell: DetailTableViewCell {
     
     override var plan: Plan! {
         didSet {
-            if let url = self.url {
-                pictureImageView.af_setImage(withURL: url)
-            } else {
-                pictureImageView.image = nil
-            }
+            setImage(url: self.url)
         }
     }
     
@@ -205,6 +247,21 @@ class DetailImageTableViewCell: DetailTableViewCell {
         default:
             return nil
         }
+    }
+    
+    private func setImage(url: URL?) {
+        guard let url = url else {
+            pictureImageView.image = nil
+            return
+        }
+        
+        let filter = AspectScaledToFillSizeFilter(size: UIScreen.size(for: 3/4, padding: 16))
+        pictureImageView.af_setImage(
+            withURL: url,
+            placeholderImage: nil,
+            filter: filter,
+            imageTransition: .crossDissolve(0.5)
+        )
     }
 }
 

@@ -21,11 +21,11 @@
             <objects>
                 <viewController id="i9y-Y8-uU2" customClass="DetailViewController" customModule="AllotMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rXZ-os-DJh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="1450"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fKb-t2-QMq">
-                                <rect key="frame" x="0.0" y="20" width="320" height="1370"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="1520"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="baseInfo" rowHeight="840" id="RcD-jf-dxJ" customClass="DetailBaseInfoTableViewCell" customModule="AllotMe" customModuleProvider="target">
@@ -321,18 +321,19 @@ JR新宿駅(東口)からは徒歩9分とは思えない、
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-hotel" translatesAutoresizingMaskIntoConstraints="NO" id="oGJ-In-pNQ">
-                                                    <rect key="frame" x="24" y="15.5" width="272" height="204"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oGJ-In-pNQ">
+                                                    <rect key="frame" x="16" y="15.5" width="288" height="216"/>
+                                                    <color key="backgroundColor" white="0.2942165799" alpha="0.86844499139999998" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="oGJ-In-pNQ" secondAttribute="height" multiplier="4:3" id="AjO-DJ-PWy"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="oGJ-In-pNQ" secondAttribute="trailing" constant="16" id="9H2-rh-oUO"/>
+                                                <constraint firstAttribute="trailing" secondItem="oGJ-In-pNQ" secondAttribute="trailing" constant="16" id="0Zt-xZ-MNm"/>
+                                                <constraint firstItem="oGJ-In-pNQ" firstAttribute="leading" secondItem="Kk3-vV-Hqi" secondAttribute="leading" constant="16" id="15z-40-HBD"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="oGJ-In-pNQ" secondAttribute="bottom" constant="8" id="FCW-66-Kjc"/>
                                                 <constraint firstItem="oGJ-In-pNQ" firstAttribute="top" secondItem="Kk3-vV-Hqi" secondAttribute="topMargin" constant="8" id="fbF-Od-wts"/>
-                                                <constraint firstItem="oGJ-In-pNQ" firstAttribute="leading" secondItem="Kk3-vV-Hqi" secondAttribute="leadingMargin" constant="16" id="vmB-gJ-nkX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -348,31 +349,73 @@ JR新宿駅(東口)からは徒歩9分とは思えない、
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6y-UH-sNo">
-                                                    <rect key="frame" x="24" y="16" width="59.5" height="15"/>
+                                                    <rect key="frame" x="16" y="8" width="59.5" height="15"/>
                                                     <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文章がここに入る。文章がここに入る" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzV-B2-wzq">
-                                                    <rect key="frame" x="24" y="39" width="272" height="15"/>
+                                                    <rect key="frame" x="32" y="31" width="272" height="15"/>
                                                     <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="g6y-UH-sNo" firstAttribute="leading" secondItem="fxn-Nd-UGj" secondAttribute="leadingMargin" constant="16" id="AjL-5d-EfV"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="LzV-B2-wzq" secondAttribute="bottom" constant="8" id="Cn8-7E-FfN"/>
-                                                <constraint firstItem="g6y-UH-sNo" firstAttribute="top" secondItem="fxn-Nd-UGj" secondAttribute="topMargin" constant="8" id="MKO-wS-x1x"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="LzV-B2-wzq" secondAttribute="trailing" constant="16" id="amY-WI-kgg"/>
-                                                <constraint firstItem="LzV-B2-wzq" firstAttribute="leading" secondItem="fxn-Nd-UGj" secondAttribute="leadingMargin" constant="16" id="eGy-TQ-tb2"/>
-                                                <constraint firstItem="LzV-B2-wzq" firstAttribute="top" secondItem="g6y-UH-sNo" secondAttribute="bottom" constant="8" id="q0f-6u-3Ex"/>
+                                                <constraint firstAttribute="trailing" secondItem="LzV-B2-wzq" secondAttribute="trailing" constant="16" id="DmP-yf-bP1"/>
+                                                <constraint firstItem="g6y-UH-sNo" firstAttribute="top" secondItem="fxn-Nd-UGj" secondAttribute="top" constant="8" id="G93-NO-thl"/>
+                                                <constraint firstItem="LzV-B2-wzq" firstAttribute="top" secondItem="g6y-UH-sNo" secondAttribute="bottom" constant="8" id="MkC-F8-h1c"/>
+                                                <constraint firstItem="LzV-B2-wzq" firstAttribute="leading" secondItem="fxn-Nd-UGj" secondAttribute="leading" constant="32" id="U86-49-9as"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LzV-B2-wzq" secondAttribute="bottom" constant="8" id="fck-oS-3fw"/>
+                                                <constraint firstItem="g6y-UH-sNo" firstAttribute="leading" secondItem="fxn-Nd-UGj" secondAttribute="leading" constant="16" id="gbc-Jc-tjM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="captionLabel" destination="g6y-UH-sNo" id="1xm-xx-3nx"/>
                                             <outlet property="valueLabel" destination="LzV-B2-wzq" id="hxq-qg-ylb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="link" rowHeight="78" id="uw2-5n-l8b" customClass="DetailLinkTableViewCell" customModule="AllotMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1306" width="320" height="78"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uw2-5n-l8b" id="Ngr-bR-NNh">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l41-Kr-qMl">
+                                                    <rect key="frame" x="16" y="8" width="59.5" height="15"/>
+                                                    <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykE-W8-7cd" customClass="Button" customModule="AllotMe" customModuleProvider="target">
+                                                    <rect key="frame" x="32" y="31" width="256" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="p4I-Rp-dkV"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <inset key="imageEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                                                    <state key="normal" title="03012345678" image="icon-tel"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="style" value="blue"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ykE-W8-7cd" secondAttribute="bottom" constant="8" id="E3Q-9h-7iA"/>
+                                                <constraint firstAttribute="trailing" secondItem="ykE-W8-7cd" secondAttribute="trailing" constant="32" id="IpS-Gv-cHY"/>
+                                                <constraint firstItem="ykE-W8-7cd" firstAttribute="top" secondItem="l41-Kr-qMl" secondAttribute="bottom" constant="8" id="LUN-Rw-Iu6"/>
+                                                <constraint firstItem="l41-Kr-qMl" firstAttribute="top" secondItem="Ngr-bR-NNh" secondAttribute="top" constant="8" id="cwg-md-3TE"/>
+                                                <constraint firstItem="l41-Kr-qMl" firstAttribute="leading" secondItem="Ngr-bR-NNh" secondAttribute="leading" constant="16" id="d60-be-gFX"/>
+                                                <constraint firstItem="ykE-W8-7cd" firstAttribute="leading" secondItem="Ngr-bR-NNh" secondAttribute="leading" constant="32" id="fgh-Yf-UCY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="captionLabel" destination="l41-Kr-qMl" id="c9w-C5-cDp"/>
+                                            <outlet property="valueButton" destination="ykE-W8-7cd" id="7Lf-AH-5XR"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -382,7 +425,7 @@ JR新宿駅(東口)からは徒歩9分とは思えない、
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDd-Gt-V1W" customClass="Button" customModule="AllotMe" customModuleProvider="target">
-                                <rect key="frame" x="16" y="1398" width="288" height="44"/>
+                                <rect key="frame" x="16" y="1548" width="288" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ZoO-YU-rkd"/>
                                 </constraints>
@@ -404,7 +447,7 @@ JR新宿駅(東口)からは徒歩9分とは思えない、
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="s4h-Fu-x2u"/>
                     </view>
-                    <size key="freeformSize" width="320" height="1450"/>
+                    <size key="freeformSize" width="320" height="1600"/>
                     <connections>
                         <outlet property="tableView" destination="fKb-t2-QMq" id="y8H-Hh-Jb9"/>
                     </connections>
@@ -415,7 +458,7 @@ JR新宿駅(東口)からは徒歩9分とは思えない、
         </scene>
     </scenes>
     <resources>
+        <image name="icon-tel" width="32" height="32"/>
         <image name="logo-jalan-2" width="161" height="55"/>
-        <image name="sample-hotel" width="750" height="498"/>
     </resources>
 </document>
