@@ -10,6 +10,13 @@ extension XMLIndexer {
         return element?.text
     }
     
+    var stringFilledValue: String? {
+        guard let ret = element?.text, !ret.isEmpty else {
+            return nil
+        }
+        return ret
+    }
+    
     var stringValue: String {
         return string ?? ""
     }

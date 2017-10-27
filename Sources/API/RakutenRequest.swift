@@ -70,9 +70,9 @@ class RakutenRequest: WebAPIRequestable {
         plan.thumbURLString = xml["hotelThumbnailUrl"].stringValue
         plan.imageURLString = xml["hotelImageUrl"].stringValue
         plan.imageURLStrings = [
-            xml["hotelImageUrl"].string,
-            xml["roomImageUrl"].string,
-            xml["hotelMapImageUrl"].string,
+            xml["hotelImageUrl"].stringFilledValue,
+            xml["roomImageUrl"].stringFilledValue,
+            xml["hotelMapImageUrl"].stringFilledValue,
         ].flatMap { $0 }
         
         plan.ratingCount = xml["reviewCount"].intValue
@@ -87,7 +87,7 @@ class RakutenRequest: WebAPIRequestable {
     private func parse(hotelDetailInfo xml: XMLIndexer, to plan: inout Plan) {
         plan.checkIn = xml["checkinTime"].stringValue
         plan.checkOut = xml["checkoutTime"].stringValue
-        plan.lastCheckIn = xml["lastCheckinTime"].stringValue
+        plan.lastCheckIn = xml["lastCheckinTime"].stringFilledValue
         plan.reservationTel = xml["reserveTelephoneNo"].stringValue
     }
     
